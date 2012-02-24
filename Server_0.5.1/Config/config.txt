@@ -1,0 +1,16 @@
+begin test  var1 = 12.3    var2 = true
+  var3 = asghar
+  var4 = false
+
+
+  var5 = "mmm"
+end
+
+begin test2
+  var1		 =    444
+
+
+  var2 = false
+  var3 = "gholi"
+end
+

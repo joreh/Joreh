@@ -1,0 +1,26 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+Kernel	Kernel.cpp	/^Kernel::Kernel()$/;"	f	class:Kernel
+Kernel	Kernel.h	/^class Kernel : public QObject$/;"	c
+__KERNEL_H	Kernel.h	2;"	d
+agentConnected	Kernel.cpp	/^void Kernel::agentConnected( unsigned indx )$/;"	f	class:Kernel
+agentDisconnected	Kernel.cpp	/^void Kernel::agentDisconnected( unsigned indx )$/;"	f	class:Kernel
+agentMessageReceived	Kernel.cpp	/^void Kernel::agentMessageReceived( unsigned indx, string msg )$/;"	f	class:Kernel
+m_agentIDIndxMap	Kernel.h	/^  std::map<unsigned, unsigned> m_agentIDIndxMap;$/;"	m	class:Kernel
+m_agentIndxIDMap	Kernel.h	/^  std::map<unsigned, unsigned> m_agentIndxIDMap;$/;"	m	class:Kernel
+m_agentsServer	Kernel.h	/^  CommunicationController *m_agentsServer;$/;"	m	class:Kernel
+m_lastObserverID	Kernel.h	/^  unsigned m_lastObserverID;$/;"	m	class:Kernel
+m_messageGenerator	Kernel.h	/^  MessageGenerator m_messageGenerator;$/;"	m	class:Kernel
+m_monitorInitMap	Kernel.h	/^  std::map<unsigned, bool> m_monitorInitMap;$/;"	m	class:Kernel
+m_monitorsServer	Kernel.h	/^  CommunicationController *m_monitorsServer;$/;"	m	class:Kernel
+m_objectManager	Kernel.h	/^  ObjectManager m_objectManager;$/;"	m	class:Kernel
+m_timer	Kernel.h	/^  QTimer m_timer;$/;"	m	class:Kernel
+monitorConnected	Kernel.cpp	/^void Kernel::monitorConnected( unsigned indx )$/;"	f	class:Kernel
+monitorDisconnected	Kernel.cpp	/^void Kernel::monitorDisconnected( unsigned indx )$/;"	f	class:Kernel
+monitorMessageReceived	Kernel.cpp	/^void Kernel::monitorMessageReceived( unsigned indx, string msg )$/;"	f	class:Kernel
+newCycle	Kernel.cpp	/^void Kernel::newCycle()$/;"	f	class:Kernel
+~Kernel	Kernel.cpp	/^Kernel::~Kernel()$/;"	f	class:Kernel

@@ -1,0 +1,36 @@
+<model id="25" name="mincraft_soldier" color="990000" number="3">
+<desc>
+سرباز معمولی
+</desc>
+<attributes>
+<attr name="مهمات"  key="ammo">10</attr>
+<attr name="آذوقه"  key="food">10</attr>
+<attr name="قدرت آتش"  key="firePower">7</attr>
+<attr name="دقت آتش"  key="fireAccr">8</attr>
+<attr name="سرعت حرکت"  key="speed">4</attr>
+<attr name="برد نویز صدای شلیک"  key="fireNoise">5</attr>
+<attr name="برد اسلحه گرم"  key="weaponRange">5</attr>
+<attr name="برد اسلحه سرد"  key="coldArmRange">4</attr>
+<attr name="برد مخابرات صوت"  key="soundRange">4</attr>
+<attr name="برد مخابرات داده"  key="dataRange">25</attr>
+<attr name="دید موثر"  key="effectiveVision">20</attr>
+<attr name="حداکثر دید"  key="maxVision">50</attr>
+<attr name="احتمال دیده شدن"  key="beingSeen">3</attr>
+<attr name="برد نویز حرکت"  key="moveNoise">10</attr>
+<attr name="روحیه"  key="spirit">10</attr>
+<attr name="خستگی"  key="tiredness">10</attr>
+<attr name="سلامتی"  key="wellness">10</attr>
+<attr name="استرس"  key="stress">10</attr>
+</attributes>
+<behaviours>
+<bhv name="راه رفتن" key="walk" ><preq>walk,standup,run,fleet,warmup</preq></bhv>
+<bhv name="ایستادن" key="standup" ><preq>walk,lie,warmup</preq></bhv>
+<bhv name="دراز کشیدن" key="lie" ><preq>walk,standup</preq></bhv>
+<bhv name="استراحت کردن" key="rest" ><preq>walk,standup,lie</preq></bhv>
+<bhv name="آماده باش" key="warmup" ><preq>walk,standup,run,fleet,warmup</preq></bhv>
+<bhv name="دویدن" key="run" ><preq>walk,standup,fleet,warmup</preq></bhv>
+<bhv name="فرارکردن" key="fleet" ><preq>walk,standup,fleet,warmup</preq></bhv>
+<bhv name="شلیک کردنِ" key="shoot" ><preq>walk,standup,run,fleet,warmup,lie</preq></bhv>
+<bhv name="صحبت کردن" key="talk" ><preq>walk,standup,run,fleet,warmup,lie</preq></bhv>
+</behaviours>
+</model>
