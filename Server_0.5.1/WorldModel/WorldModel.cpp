@@ -22,6 +22,7 @@ Object &WorldModel::setObject( unsigned id )
   return m_objects[id-1];
 }
 
+
 unsigned WorldModel::getNumOfObjects() const
 {
   return m_objects.size();
@@ -59,5 +60,24 @@ const Field &WorldModel::getField() const
 Field &WorldModel::setField()
 {
   return m_field;
+}
+
+unsigned WorldModel::getTeamId( string teamName )
+{
+  return m_teamId[teamName];
+}
+
+map<string, unsigned> &WorldModel::setTeamIdMap()
+{
+  return m_teamId;
+}
+
+unsigned WorldModel::setupTeam( string teamName )
+{
+  if( m_teamId.find( teamName ) != m_teamId.end() )
+    return 0;
+
+  m_teamId[teamName] = m_teamId.size();
+  return m_teamId[teamName];
 }
 

@@ -1,98 +1,166 @@
 #include "MapSetParser.h"
 #include <vector>
+#include <QDebug>
+#include <QDomDocument>
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
 
 namespace GIS
 {
-
-    MapSetParser::MapSetParser(MapSetData *d)
+    MapSetParser::MapSetParser(QFile* file)
     {
-         msd = d;
+        this->xmlFile = file;
+        QFileInfo info(*this->xmlFile);
+        this->path = info.absolutePath();
+
+        if(!Parse())
+        {
+            qDebug() << "xml parsing was not successful" << endl;
+            return;
+        }
     }
 
-    bool MapSetParser::startElement(const QString &, const QString &, const QString &qName, const QXmlAttributes &attrs)
+    bool MapSetParser::Parse()
     {
-        if( inMapSet && qName == "heigthFile" )
+        QDomDocument doc("Mapset");
+        if(!this->xmlFile->open(QIODevice::ReadOnly))
         {
-          QString name, addr;
-
-          for( int i=0; i<attrs.count(); i++ )
-          {
-            if( attrs.localName( i ) == "name" )
-              name = attrs.value( i );
-            else if( attrs.localName( i ) == "address" )
-              addr = attrs.value( i );
-          }
-          msd->heigthFileName = name;
-          msd->heigthFileAddr = addr;
+            qDebug() << "Error in reading xml file" << endl;
+            return false;
         }
-
-        else if( inMapSet && qName == "heigthInfo" )
+        if(!doc.setContent(this->xmlFile))
         {
-            QString maxi, mini;
-            for( int i=0; i<attrs.count(); i++ )
-            {
-                if( attrs.localName( i ) == "max" )
-                    maxi = attrs.value( i );
-                else if( attrs.localName( i ) == "min" )
-                    mini = attrs.value( i );
-            }
-            msd->hMax = maxi;
-            msd->hMin = mini;
+            qDebug() << "Error in xml Format" << endl;
+            return false;
         }
+        this->xmlFile->close();
 
-        if( inMapSet && qName == "shapeFile" )
-        {
-            QString name, addr, type;
-            for( int i=0; i<attrs.count(); i++ )
-            {
-                if( attrs.localName( i ) == "name" )
-                    name = attrs.value( i );
-                else if( attrs.localName( i ) == "address" )
-                    addr = attrs.value( i );
-                else if( attrs.localName( i ) == "type" )
-                    type = attrs.value( i );
-            }
-            msd->shapeFileName.push_back(name);
-            msd->shapeFileAddr.push_back(addr);
-            msd->shapeFileType.push_back(type);
-        }
-
-        if( inMapSet && qName == "rasterFile" )
-        {
-            QString name, addr;
-            for( int i=0; i<attrs.count(); i++ )
-            {
-                if( attrs.localName( i ) == "name" )
-                    name = attrs.value( i );
-                else if( attrs.localName( i ) == "address" )
-                    addr = attrs.value( i );
-
-            }
-            msd->rasterFileName.push_back(name);
-            msd->rasterFileAddr.push_back(addr);
-
-        }
-        else if( qName == "MapSet" )
-        {
-            inMapSet = true;
-            msd->name = attrs.value(0);
-        }
-        return true;
-    };
-
-    bool MapSetParser::startDocument()
-    {
-        inMapSet = false;
+        QDomElement e = doc.documentElement();
+        MapsetParse(e);
 
         return true;
-    };
+    }
 
-    bool MapSetParser::endElement(const QString &, const QString &, const QString &qName)
+    QString MapSetParser::SetFileAddress(QString str)
     {
-        if( qName == "MapSet" )
+        while(str[0] == ' ')
+            str.remove(0,1);
+        while(str[str.count()-1] == ' ')
+            str.remove(str.count()-1,1);
+        if(str[0] == '.')
         {
-            inMapSet = false;
+            str.remove(0,1);
+            return this->path + str;
         }
-        return true;
-    };
+        else
+            return str;
+    }
+
+    void MapSetParser::ShapefileParse(QDomElement element, MapsetData& ms)
+    {
+        ShapefileData shf;
+        shf.address = SetFileAddress(element.attribute("address"));
+        shf.type = element.attribute("type");
+
+        ms.shapefiles.push_back(shf);
+
+
+        QDomElement e = element.firstChild().toElement();
+
+        while(!e.isNull())
+        {
+            if(e.tagName() == "Column")
+            {
+                ColumnParse(e, ms.shapefiles[ms.shapefiles.size()-1]);
+            }
+
+            e = e.nextSibling().toElement();
+        }
+    }
+
+    void MapSetParser::ColumnParse(QDomElement element, ShapefileData &shf)
+    {
+        ColumnData c;
+        c.source = element.attribute("source");
+        c.target = element.attribute("target");
+
+        shf.columns.push_back(c);
+
+
+        QDomElement e = element.firstChild().toElement();
+
+        while(!e.isNull())
+        {
+            if(e.tagName() == "Mapping")
+            {
+                MappingParse(e, shf.columns[shf.columns.size()-1]);
+            }
+
+            e = e.nextSibling().toElement();
+        }
+    }
+
+    void MapSetParser::MappingParse(QDomElement element, ColumnData &c)
+    {
+        MappingData m;
+        m.from = element.attribute("from");
+        m.to = element.attribute("to");
+
+        c.mappings.push_back(m);
+
+
+    }
+
+    void MapSetParser::RasterfileParse(QDomElement element, MapsetData &ms)
+    {
+        RasterfileData r;
+        r.address = SetFileAddress(element.attribute("address"));
+        r.id = element.attribute("id").toInt();
+
+        ms.rasterfiels.push_back(r);
+    }
+
+    void MapSetParser::MapSizeParse(QDomElement element, MapsetData &ms)
+    {
+        MapSizeData r;
+        r.maxX = element.attribute("maxX").toFloat();
+        r.minX = element.attribute("minX").toFloat();
+        r.maxY = element.attribute("maxY").toFloat();
+        r.minY = element.attribute("minY").toFloat();
+        data.mapSize = r;
+    }
+
+    void MapSetParser::MapsetParse(QDomElement element)
+    {
+
+        this->data.name = element.attribute("name");
+
+
+        QDomElement e = element.firstChild().toElement();
+        while(!e.isNull())
+        {
+            if(e.tagName() == "Shapefile")
+            {
+                ShapefileParse(e, this->data);
+            }
+            else if(e.tagName() == "Rasterfile")
+            {
+                RasterfileParse(e, this->data);
+            }
+            else if(e.tagName() == "MapSize")
+            {
+                MapSizeParse(e, this->data);
+            }
+
+            e = e.nextSibling().toElement();
+        }
+    }
+
+    MapsetData MapSetParser::GetData()
+    {
+        return data;
+    }
 }

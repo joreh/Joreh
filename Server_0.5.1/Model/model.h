@@ -3,6 +3,9 @@
 #include <QMap>
 #include "behavior.h"
 #include "attribute.h"
+#include <string>
+#include <map>
+
 #ifndef MODEL_H
 #define MODEL_H
 
@@ -16,7 +19,11 @@ private:
     QString Color;
     QList <behavior> Behavior;
     QList <Attribute> attribute;
+
+    std::map<std::string, double> m_attrVal;
+
 public:
+
     Model();
     Model(QString);
     bool getModelFromFile(QString);
@@ -28,7 +35,7 @@ public:
     void setDesc(QString n){Desc = n;}
     void setColor(QString n){Color = n;}
     void setID(int n){id = n;}
-    int getID(){return id;}
+    int getID() const{return id;}
     QList <behavior> getBehaviors(){return Behavior;}
     QList <Attribute> getAttributes(){return attribute;}
     void printBehavior();
@@ -37,6 +44,11 @@ public:
     behavior getBehavior(int i){if(i<Behavior.count()) return Behavior[i];}
     int countAttribute(){return attribute.count();}
     int countBehavior(){return Behavior.count();}
+
+    const std::map<std::string, double> &getAttrValMap() const;
+
+    double getValue( std::string attr );
+    void setValue( std::string attr, double val );
 };
 
 #endif // MODEL_H

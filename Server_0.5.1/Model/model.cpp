@@ -9,6 +9,8 @@
 #include "attribute.h"
 #include "iostream"
 
+using namespace std;
+
 Model::Model()
 {
 }
@@ -45,6 +47,8 @@ bool Model::getModelFromFile(QString filename){
                                         b->SetName( attrs.value("key").toString() );
                                         b->SetFaName( attrs.value("name").toString() );
                                         b->SetValue( xml.text().toString() );
+                                        m_attrVal[attrs.value( "key" ).toString().toStdString()] = 
+                                                  xml.text().toString().toFloat();
                                         attribute.append(*b);
                                         free(b);
                                     }
@@ -86,3 +90,19 @@ void Model::printAttribute(){
     return;
 
 }
+
+const map<string, double> &Model::getAttrValMap() const
+{
+  return m_attrVal;
+}
+
+double Model::getValue( string attr )
+{
+  return m_attrVal[attr];
+}
+
+void Model::setValue( string attr, double val )
+{
+  m_attrVal[attr] = val;
+}
+

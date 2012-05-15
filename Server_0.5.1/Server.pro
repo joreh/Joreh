@@ -34,6 +34,7 @@ INCLUDEPATH += . \
 
 # Input
 HEADERS += ObjectManager/ObjectManager.h \
+           ObjectManager/ObjectParameters.h \
            Parser/Command.h \
            Parser/CommandParser.h \
            Kernel/Kernel.h \
@@ -53,10 +54,14 @@ HEADERS += ObjectManager/ObjectManager.h \
            Model/behavior.h \
            Model/model.h \  
 	   Geom/Vector3D.h \
-           Geom/Comp_Geom.h \
+           Geom/Geometry.h \
            GIS/GISServer.h \
+           GIS/MapSetParser.h \
+           GIS/GISUtility.h \
+           GIS/GISServer.h \
+           GIS/GIS.h \
            GIS/DBServer.h \
-           GIS/MapSetParser.h
+           GIS/StandardsParser.h
 
 FLEXSOURCES += Parser/CommandParser.l
 BISONSOURCES += Parser/CommandParser.y
@@ -64,6 +69,7 @@ BISONSOURCES += Parser/CommandParser.y
 
 SOURCES += main.cpp \
            ObjectManager/ObjectManager.cpp \
+           ObjectManager/ObjectParameters.cpp \
 	   MessageGenerator/MessageGenerator.cpp \
 	   MessageGenerator/ServerMessage.cpp \
            Parser/Command.cpp \
@@ -81,10 +87,11 @@ SOURCES += main.cpp \
            Utilities/SwarmException.cpp \
            Utilities/General.cpp \
 	   Geom/Vector3D.cpp \
-           Geom/Comp_Geom.cpp \
-           GIS/DBServer.cpp \
+           Geom/Geometry.cpp \
+           GIS/MapSetParser.cpp \
            GIS/GISServer.cpp \
-           GIS/MapSetParser.cpp
+           GIS/DBServer.cpp \
+           GIS/StandardsParser.cpp
 	
 QT += network
 QT += sql
@@ -107,7 +114,12 @@ QMAKE_EXTRA_COMPILERS += flex
 
 OTHER_FILES += \
         $$BISONSOURCES \
-        $$FLEXSOURCES
+        $$FLEXSOURCES \
+        ConfFiles/Init_SGISdb.sql \
+        ConfFiles/GISServer_config.txt \
+        ConfFiles/CleanDB.sql \
+        ConfFiles/SGIS-Type-Standard.xml \
+        ConfFiles/ShapeFile/test.xml \
 
 QMAKE_CLEAN += CommandParser_yacc.h
 

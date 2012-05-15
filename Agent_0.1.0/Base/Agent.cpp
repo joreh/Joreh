@@ -17,8 +17,7 @@ Agent::Agent( Connection *connection, WorldModel *worldModel )
   m_model = new Model();
   m_connection = connection;
   m_worldModel = worldModel;
-  srand( time( 0 ) );
-
+  srand( time(0) ); 
   connect( m_connection, SIGNAL(messageReceived(std::string)),
            this, SLOT(messageReceived(std::string)) );
   connect( m_connection, SIGNAL(disconnected()),
@@ -27,8 +26,7 @@ Agent::Agent( Connection *connection, WorldModel *worldModel )
 
 void Agent::messageReceived( string msg )
 {
-  cout << msg << endl;
-  for(int j=1;j<m_worldModel->getNumOfObjects();j++){
+    for(int j=1;j<m_worldModel->getNumOfObjects();j++){
       cout<<"obj ID: "<<m_worldModel->getObject(j).getModelID()<<endl;
   }
   if(msg.find("(")== string::npos){
@@ -38,16 +36,21 @@ void Agent::messageReceived( string msg )
   else{
       update_world_model( msg, m_worldModel );
       if(msg.find("models")!= string::npos ){
+         // int itEnd;;
          // int itEnd;
          map<unsigned, map<int, int>::const_iterator> fast_random_lookup;
          map<int, int>::const_iterator it = m_worldModel->m_models.begin() , itEnd = m_worldModel->m_models.end();
          for (unsigned i = 0; it != itEnd; ++it, ++i) {
            fast_random_lookup[i] = it;
          }
-          pair<int,int> v = *fast_random_lookup[rand()%m_worldModel->m_models.size()];
-          QString a  = QString::number(v.first);
-          cout<<"Creating new Agent with a class of "<<a.toAscii().data()<<endl;
-          m_connection->sendData( InitAction( "team1", a.toStdString() ).toString() );
+		
+		   pair<int,int> v = *fast_random_lookup[rand()%2];
+
+	          QString a  = QString::number(v.first);
+	  
+     
+          m_connection->sendData( InitAction( m_worldModel->getTeamName(), 
+                                              a.toStdString() ).toString() );
       }
       else
       {
@@ -75,8 +78,7 @@ bool Agent::ParseModel(string input,string filename)
 
 void Agent::disconnected()
 {
-  cout << "agent is disconnected from the server" << endl;
-  abort();
+    abort();
 }
 double fRand(double fMin, double fMax)
 {
@@ -88,45 +90,31 @@ Action *Agent::decide()
 
   const Object &obj = m_worldModel->getObject( m_worldModel->getAgentID() );
   Vector3D pos =  obj.getPosition();
-  static double X=fRand(-100,100);
-  static double Y=fRand(-100,100);
-  cout<<"XXXXXXXXXXXXX "<<X<<" "<<Y<<endl<<"AG : "<<pos.getX()<<"  "<<pos.getY()<<endl;
-  if( pow((pos.getX()-X),2)+pow((Y-pos.getY()),2)>4  ){
-      cout<<"Hasn't Arrived!!"<<endl;
-      return new WalkAction( X,Y );
-  }
-  else{
-      X=fRand(-100,100);
-      Y=fRand(-100,100);
-  return new WalkAction(X,Y);
-  }
-/*
-  Vector3D vel = obj.getVelocity();
-
-  if( obj.getPosFitness() < m_bestLocalFitness )
+  static double X=0.0;
+  static double Y=-0.8;
+  
+  if (m_worldModel->getCurCycle() == 0)
   {
-    m_bestLocalFitness = obj.getPosFitness();
-    m_bestLocalPos = obj.getPosition();
+	return new MoveAction(50,-50);
   }
-
-  for( unsigned i = 0; i < m_worldModel->getNumOfObjects(); i ++ )
+  else
   {
-    const Object &particleObject = m_worldModel->getObjectByIndex( i );
+	if( pos.getX() > 20 || pos.getY() > 20)
+	{
+		//return new StandAction();	
 
-    if( particleObject.getPosFitness() < m_bestGlobalFitness )
-    {
-      m_bestGlobalFitness = particleObject.getPosFitness();
-      m_bestGlobalPos = particleObject.getPosition();
-    }
+		if( obj.getModelID() == 13 )
+		  	return new WalkAction(X,Y*-1);
+	   	else 
+			return new RunAction(X,Y*-1);
+	}
+	else
+	{
+
+		if( obj.getModelID() == 23 )
+		  	return new WalkAction(X,Y);
+	   	else 
+			return new RunAction(X,Y);
+	}
   }
-
-
-  vel = vel * ( 1000 - min( 1000, m_worldModel->getCurCycle() ) ) / 1000.0
-        + ( m_bestLocalPos - obj.getPosition() ) * 2.0 * General::random( 0, 1.0 )
-        + ( m_bestGlobalPos - obj.getPosition() ) * 2.0 * General::random( 0, 1.0 );
-
-*/
-
-
-
 }

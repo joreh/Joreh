@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'CommunicationController.h'
 **
-** Created: Mon Nov 14 14:15:08 2011
+** Created: Mon May 14 03:32:45 2012
 **      by: The Qt Meta Object Compiler version 62 (Qt 4.7.2)
 **
 ** WARNING! All changes made in this file will be lost!

@@ -2,8 +2,15 @@
 #include <sstream>
 
 using namespace std;
-StandupAction::StandupAction()
+StandAction::StandAction()
 {
+
+}
+std::string StandAction::toString() const
+{
+  ostringstream out;
+  out << "(stand)";
+  return out.str();
 
 }
 RunAction::RunAction()
@@ -74,7 +81,23 @@ void WalkAction::setX(double e){
 void WalkAction::setY(double e){
     posY = e;
 }
-
+string RunAction::toString() const
+{
+    ostringstream out;
+    out << showpoint << fixed << "(run " << posX << " " << posY << ")";
+    return out.str();
+}
+RunAction::RunAction(double x, double y)
+{
+    posX = x;
+    posY = y;
+}
+void RunAction::setX(double e){
+    posX = e;
+}
+void RunAction::setY(double e){
+    posY = e;
+}
 MoveAction::MoveAction( double velX, double velY )
 {
   setVelX( velX );

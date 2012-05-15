@@ -1,4 +1,4 @@
-<model id="23" name="ordinary" color="990000" number="3">
+<model id="23" name="ordinary" color="aaaaaa" number="3">
 <desc>
 سرباز معمولی
 </desc>
@@ -18,9 +18,14 @@
 <attr name="احتمال دیده شدن"  key="beingSeen">3</attr>
 <attr name="برد نویز حرکت"  key="moveNoise">10</attr>
 <attr name="روحیه"  key="spirit">10</attr>
-<attr name="خستگی"  key="tiredness">10</attr>
-<attr name="سلامتی"  key="wellness">10</attr>
-<attr name="استرس"  key="stress">10</attr>
+<attr name="خستگی"  key="tiredness">0.0</attr>
+<attr name="سلامتی"  key="wellness">1.0</attr>
+<attr name="استرس"  key="stress">1.0</attr>
+<attr name="افزایش خستگی"  key="spiritDecay">0</attr>
+<attr name="افزایش سلامتی"  key="tirednessDecay">0</attr>
+<attr name="افزایش روحیه"  key="wellnessDecay">0</attr>
+<attr name="افزایش استرس"  key="stressDecay">0</attr>
+
 </attributes>
 <behaviours>
 <bhv name="راه رفتن" key="walk" ><preq>walk,standup,run,fleet,warmup</preq></bhv>

@@ -102,19 +102,19 @@ public:
     * \param velX the velocity vector along x-coordinate
     * \param velY the velocity vector along y-coordinate
     */
-  MoveCommand( double velX, double velY );
+  MoveCommand( double x, double y );
 
   /** \brief a get function for velX
     *
     * \returns velocity along x-coordinate
     */
-  double getVelX() const;
+  double getX() const;
 
   /** \brief a get function for velY
     *
     * \returns velocity along y-coordinate
     */
-  double getVelY() const;
+  double getY() const;
 
   /** \brief an overrided function to provide a string representation of
     *        Move Command
@@ -134,12 +134,12 @@ private:
   /** \brief velocity along x-coordinate
     *
     */
-  double m_velX;
+  double m_x;
 
   /** \brief velocity along y-coordinate
     *
     */
-  double m_velY;
+  double m_y;
 };
 /** \brief a class to maintain parameters of a walk command.
   *        agents can move their physical location using
@@ -193,5 +193,430 @@ private:
     */
   double m_velY;
 };
+/** \brief a class to maintain parameters of a rest command.
+  *        agents can change state to standup with
+  *        this command.
+  */
+class RestCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    */
+  RestCommand(  );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+};
+/** \brief a class to maintain parameters of a rest command.
+  *        agents can change state to standup with
+  *        this command.
+  */
+class StandCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    */
+  StandCommand(  );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+};
+
+
+/** \brief a class to maintain parameters of a rest command.
+  *        agents can change state to standup with
+  *        this command.
+  */
+class LieCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    */
+  LieCommand(  );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+};
+
+
+/** \brief a class to maintain parameters of a rest command.
+  *        agents can change state to standup with
+  *        this command.
+  */
+class ReadyCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    */
+  ReadyCommand(  );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+};
+
+/** \brief a class to maintain parameters of a walk command.
+  *        agents can move their physical location using
+  *        this command.
+  */
+class RunCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    * \param velX the velocity vector along x-coordinate
+    * \param velY the velocity vector along y-coordinate
+    */
+  RunCommand( double velX, double velY );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  double getVelX() const;
+
+  /** \brief a get function for velY
+    *
+    * \returns velocity along y-coordinate
+    */
+  double getVelY() const;
+
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+  /** \brief velocity along x-coordinate
+    *
+    */
+  double m_velX;
+
+  /** \brief velocity along y-coordinate
+    *
+    */
+  double m_velY;
+};
+/** \brief a class to maintain parameters of a walk command.
+  *        agents can move their physical location using
+  *        this command.
+  */
+class EvadeCommand : public Command
+{
+public:
+
+  /** \brief constructor of the class that takes a force velocity
+    *        as its arguments
+    * \param velX the velocity vector along x-coordinate
+    * \param velY the velocity vector along y-coordinate
+    */
+  EvadeCommand( double velX, double velY );
+
+  /** \brief a get function for velX
+    *
+    * \returns velocity along x-coordinate
+    */
+  double getVelX() const;
+
+  /** \brief a get function for velY
+    *
+    * \returns velocity along y-coordinate
+    */
+  double getVelY() const;
+
+  /** \brief an overrided function to provide a string representation of
+    *        walk Command
+    *
+    * \returns string representation of Move command
+    */
+  std::string toString() const;
+
+  /** \brief getCommandName function
+    *
+    * \return walk command name
+    */
+  std::string getCommandName() const;
+
+private:
+
+  /** \brief velocity along x-coordinate
+    *
+    */
+  double m_velX;
+
+  /** \brief velocity along y-coordinate
+    *
+    */
+  double m_velY;
+};
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class ShootCommand : public Command
+{
+public:
+
+  ShootCommand( double ang );
+
+  double getAng() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  double m_ang;
+};
+
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class XShootCommand : public Command
+{
+public:
+
+  XShootCommand( double ang );
+
+  double getAng() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  double m_ang;
+};
+
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class MineCommand : public Command
+{
+public:
+
+  MineCommand( double x, double y );
+
+  double getX() const;
+  double getY() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  double m_x;
+  double m_y;
+};
+
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class DemineCommand : public Command
+{
+public:
+
+  DemineCommand( double x, double y );
+
+  double getX() const;
+  double getY() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  double m_x;
+  double m_y;
+};
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class HealCommand : public Command
+{
+public:
+
+  HealCommand( int id );
+
+  int getId() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  int m_id;
+};
+
+/** \brief this class is implemented to be the base of command storage classes.
+ *        The commands given from agents or users are parsed and then converted
+ *        to an instance of a class which is its self inherited from Command class.
+ *
+ */
+class SupportCommand : public Command
+{
+public:
+
+  SupportCommand( int id );
+
+  int getId() const;
+
+  /** \brief an abstract function to provide a string representation of an instance
+    *
+    * \returns string representation of an instance
+    */
+  std::string toString() const;
+
+  /** \brief an abstract function to present the name of command
+    *
+    * \returns command's name
+    */
+  std::string getCommandName() const;
+
+private:
+  int m_id;
+
+};
+
+
 #endif
 

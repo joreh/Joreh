@@ -2,6 +2,7 @@
 #include "Parser/CommandParser.h"
 #include "MessageGenerator/ServerMessage.h"
 #include "CommunicationController/TcpController.h"
+#include "ObjectManager/ObjectParameters.h"
 
 #include <vector>
 #include <QDir>
@@ -12,6 +13,8 @@ using namespace std;
 Kernel::Kernel()
       : m_timer( this )
 {
+  m_initWait = 0;
+  ObjectParameters::initParameters();
 
   /* Read the Models : By Milad */
   
@@ -25,7 +28,8 @@ Kernel::Kernel()
     m_models[m->getID()] = m;
    }
 
-
+  m_objectManager.setModel( m_models );
+  m_objectManager.updateGISDBByModels();
   m_lastObserverID = 0;
 
   m_agentsServer = new TcpController( this );
@@ -50,18 +54,28 @@ Kernel::Kernel()
              this, SLOT(monitorDisconnected(unsigned)) );
 
   connect( &m_timer, SIGNAL(timeout()), this, SLOT(newCycle()) );
-  m_timer.start( 100 );
+  m_timer.start( 200 );
 }
 
 Kernel::~Kernel()
 {
   delete m_agentsServer;
   delete m_monitorsServer;
+
+  for( map<int, Model *>::iterator itr = m_models.begin(); 
+       itr != m_models.end(); itr ++ )
+    delete itr->second;
 }
 
 void Kernel::agentMessageReceived( unsigned indx, string msg )
 {
   vector<Command *> *commands = parseCommandMessage( msg );
+
+  if( !commands->size() )
+  {
+    cerr << "could not parse the message " << msg << endl;
+    return;
+  }
 
   if( !m_agentIndxIDMap[indx] )
   {
@@ -152,9 +166,15 @@ void Kernel::newCycle()
 {
   int curCycle = m_objectManager.getWorldModel().getCurCycle();
 
-  if( m_objectManager.getWorldModel().getNumOfObjects() >= 10 )
+  if( curCycle == 0 )
+  {
+    if( m_initWait > 100 )
+      curCycle ++;
+    else
+      m_initWait ++;
+  }
+  else
     curCycle ++;
-
   m_objectManager.update( curCycle );
 
   for( unsigned i = 1; i <=

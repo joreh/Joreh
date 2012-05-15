@@ -10,6 +10,9 @@ class WorldModel
 public:
   WorldModel();
 
+  void setTeamName( std::string teamName );
+  const std::string &getTeamName() const;
+
   const Object &getObject( unsigned id );
   Object &setObject( unsigned id );
 
@@ -32,7 +35,11 @@ public:
   void gameFinished();
   bool isGameFinished() const;
   std::map<int , int> m_models;
+
 private:
+
+  std::string m_teamName;
+
   std::map<unsigned, Object> m_objects;
   std::vector<unsigned> m_objectsIndx;
   Field m_field;

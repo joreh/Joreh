@@ -16,8 +16,15 @@ int main(int argc, char *argv[])
   short portNum = 6178;
   string serverAddress = "127.0.0.1";
 
+  string teamName = "Unknown";
+
+  if( argc >=2 )
+    teamName = argv[1];
+
   Connection connection;
   WorldModel worldModel;
+
+  worldModel.setTeamName( teamName );
 
   connection.connectToHost(
       QHostAddress( serverAddress.c_str() ), portNum );

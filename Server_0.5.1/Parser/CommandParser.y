@@ -31,6 +31,18 @@ vector<Command *> *commands;
 %token DOUBLE
 %token INTEGER
 %token STRING
+%token REST
+%token READY
+%token RUN
+%token EVADE
+%token SHOOT
+%token XSHOOT
+%token MINE
+%token DEMINE
+%token HEAL
+%token SUPPORT
+%token STAND
+%token LIE
 
 %union
 {
@@ -63,10 +75,46 @@ command        :
                        new InitCommand( $2, $3 ) );    }
                |  MOVE DOUBLE DOUBLE
                   { commands->push_back(
-                       new MoveCommand( $2, $3 ) );     }
+                       new MoveCommand( $2, $3 ) );    }
                |  WALK DOUBLE DOUBLE
                   { commands->push_back(
-                       new WalkCommand( $2, $3 ) ); };
+                       new WalkCommand( $2, $3 ) );    }
+               |  REST
+                  { commands->push_back(
+                       new RestCommand() );            }
+               |  READY
+                  { commands->push_back(
+                       new ReadyCommand() );           }
+               |  STAND
+                  { commands->push_back(
+                       new StandCommand() );           }
+               |  LIE
+                  { commands->push_back(
+                       new LieCommand() );             }
+               |  RUN DOUBLE DOUBLE
+                  { commands->push_back(
+                       new RunCommand( $2, $3 ) );     }
+               |  EVADE DOUBLE DOUBLE
+                  { commands->push_back(
+                       new EvadeCommand( $2, $3 ) );   }
+               |  SHOOT DOUBLE
+                  { commands->push_back(
+                       new ShootCommand( $2 ) );       }
+               |  XSHOOT DOUBLE
+                  { commands->push_back(
+                       new XShootCommand( $2 ) );      }
+               |  MINE DOUBLE DOUBLE
+                  { commands->push_back(
+                       new MineCommand( $2, $3 ) );    }
+               |  DEMINE DOUBLE DOUBLE
+                  { commands->push_back(
+                       new DemineCommand( $2, $3 ) );  }
+               |  HEAL INTEGER
+                  { commands->push_back(
+                       new HealCommand( $2 ) );        }
+               |  SUPPORT INTEGER
+                  { commands->push_back(
+                       new SupportCommand( $2 ) );     };
 
 
 %%
@@ -77,6 +125,7 @@ command        :
   */
 void yyerror( const char *error_str )
 {
+  cout << "test" << endl;
   for( vector<Command *>::iterator itr = commands->begin();
        itr != commands->end(); itr ++ )
     delete (*itr);

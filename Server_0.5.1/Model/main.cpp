@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
                                 continue;
         }
         if(token == QXmlStreamReader::StartElement) {
-                                /* If it's named persons, we'll go to the next.*/
+                                If it's named persons, we'll go to the next.*/
                                 /*if(xml.name() == "model") {
                                     QXmlStreamAttributes attrs = xml.attributes();
                                     std::cout<<xml.text().toString().toAscii().data();
@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 
     }
   //  std::cout<<attr.count();
-  /*  for(int i=0;i<attr.count();i++){
+    for(int i=0;i<attr.count();i++){
         std::cout<<i<<"\n";
         QMap<QString,QString> a = attr.takeAt(i);
         std::cout<<a["name"].toAscii().data()<<"\n";

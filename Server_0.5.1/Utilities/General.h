@@ -6,6 +6,7 @@ class General
 public:
 
   static double random( double minVal, double maxVal );
+  static double stableNum( double val, double minVal, double maxVali );
 };
 
 #endif

@@ -46,7 +46,19 @@
      WALK = 262,
      DOUBLE = 263,
      INTEGER = 264,
-     STRING = 265
+     STRING = 265,
+     REST = 266,
+     READY = 267,
+     RUN = 268,
+     EVADE = 269,
+     SHOOT = 270,
+     XSHOOT = 271,
+     MINE = 272,
+     DEMINE = 273,
+     HEAL = 274,
+     SUPPORT = 275,
+     STAND = 276,
+     LIE = 277
    };
 #endif
 
@@ -57,7 +69,7 @@ typedef union YYSTYPE
 {
 
 /* Line 1676 of yacc.c  */
-#line 36 "Parser/CommandParser.y"
+#line 48 "Parser/CommandParser.y"
 
   char *str;
   double d;
@@ -66,7 +78,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 70 "release/yacc_lex/CommandParser_yacc.h"
+#line 82 "release/yacc_lex/CommandParser_yacc.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

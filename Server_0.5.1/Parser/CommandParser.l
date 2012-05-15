@@ -42,6 +42,19 @@ BLANK             ([ \t\r\n])
 "init"            { return INIT;                            }
 "move"            { return MOVE;                            }
 "walk"            { return WALK;                            }
+"rest"            { return REST;                            }
+"ready"           { return READY;                           }
+"run"             { return RUN;                             }
+"evade"           { return EVADE;                           }
+"shoot"           { return SHOOT;                           }
+"xshoot"          { return XSHOOT;                          }
+"mine"            { return MINE;                            }
+"demine"          { return DEMINE;                          }
+"heal"            { return HEAL;                            }
+"support"         { return SUPPORT;                         }
+"stand"           { return STAND;                           }
+"lie"             { return LIE;                             }
+
 {STRING}          { yylval.str = clone_str( yytext );
                     return STRING;                          }
 {DOUBLE}          { yylval.d = atof( yytext );

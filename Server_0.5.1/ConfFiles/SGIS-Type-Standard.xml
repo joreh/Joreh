@@ -1,0 +1,15 @@
+<Standards>
+    <GroundTypestd>
+        <GroundType id="1" name="soil" />
+        <GroundType id="2" name="sand" />
+        <GroundType id="3" name="mud" />
+        <GroundType id="4" name="rocky" />
+        <GroundType id="5" name="mountain" />
+        <GroundType id="6" name="road" />
+        <GroundType id="7" name="jungle" />
+        <GroundType id="8" name="river" />
+        <GroundType id="9" name="lake" />
+        <GroundType id="10" name="swamp" />
+        <GroundType id="11" name="mine" />
+    </GroundTypestd>
+</Standards>

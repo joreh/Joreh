@@ -1,0 +1,5 @@
+dbServerName=127.0.0.1
+dbCatalogName=SGIS
+dbUserName=mehrab
+dbPassword=khayyam
+maxAgentID=500

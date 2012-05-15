@@ -1,8 +1,8 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'MainWindow.h'
 **
-** Created: Fri Nov 18 09:30:28 2011
-**      by: The Qt Meta Object Compiler version 62 (Qt 4.6.2)
+** Created: Fri May 11 06:48:05 2012
+**      by: The Qt Meta Object Compiler version 63 (Qt 4.8.1)
 **
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
@@ -10,8 +10,8 @@
 #include "../../GUI/MainWindow.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'MainWindow.h' doesn't include <QObject>."
-#elif Q_MOC_OUTPUT_REVISION != 62
-#error "This file was generated using the moc from 4.6.2. It"
+#elif Q_MOC_OUTPUT_REVISION != 63
+#error "This file was generated using the moc from 4.8.1. It"
 #error "cannot be used with the include files from this version of Qt."
 #error "(The moc has changed too much.)"
 #endif
@@ -20,7 +20,7 @@ QT_BEGIN_MOC_NAMESPACE
 static const uint qt_meta_data_MainWindow[] = {
 
  // content:
-       4,       // revision
+       6,       // revision
        0,       // classname
        0,    0, // classinfo
        7,   14, // methods
@@ -51,9 +51,31 @@ static const char qt_meta_stringdata_MainWindow[] = {
     "displayError(QAbstractSocket::SocketError)\0"
 };
 
+void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+{
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        MainWindow *_t = static_cast<MainWindow *>(_o);
+        switch (_id) {
+        case 0: _t->on_actionExit_triggered(); break;
+        case 1: _t->on_actionShow_Options_triggered(); break;
+        case 2: _t->repaintView(); break;
+        case 3: _t->parseMessage((*reinterpret_cast< std::string(*)>(_a[1]))); break;
+        case 4: _t->on_connectButton_clicked(); break;
+        case 5: _t->monitorDisconnected(); break;
+        case 6: _t->displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
+        default: ;
+        }
+    }
+}
+
+const QMetaObjectExtraData MainWindow::staticMetaObjectExtraData = {
+    0,  qt_static_metacall 
+};
+
 const QMetaObject MainWindow::staticMetaObject = {
     { &QMainWindow::staticMetaObject, qt_meta_stringdata_MainWindow,
-      qt_meta_data_MainWindow, 0 }
+      qt_meta_data_MainWindow, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
@@ -79,16 +101,8 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        switch (_id) {
-        case 0: on_actionExit_triggered(); break;
-        case 1: on_actionShow_Options_triggered(); break;
-        case 2: repaintView(); break;
-        case 3: parseMessage((*reinterpret_cast< std::string(*)>(_a[1]))); break;
-        case 4: on_connectButton_clicked(); break;
-        case 5: monitorDisconnected(); break;
-        case 6: displayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        default: ;
-        }
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
         _id -= 7;
     }
     return _id;

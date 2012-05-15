@@ -88,6 +88,7 @@ void graphicsview::setPoint( int indx, double realX, double realY )
     m_points[indx].realX = realX;
     m_points[indx].realY = realY;
     updatePosition( &m_points[indx] );
+    cout << realX << " " << realY << endl;
 }
 
 void graphicsview::addPoint( double realX, double realY, int model_id )

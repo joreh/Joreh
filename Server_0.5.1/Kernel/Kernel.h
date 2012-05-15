@@ -45,6 +45,8 @@ private:
 
   MessageGenerator m_messageGenerator;
 
+  int m_initWait;
+
   QTimer m_timer;
 };
 

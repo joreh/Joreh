@@ -3,6 +3,7 @@
 
 #include "Object.h"
 #include "Field.h"
+#include "Model/model.h"
 #include <vector>
 
 class WorldModel
@@ -24,8 +25,14 @@ public:
   const Field &getField() const;
   Field &setField();
 
+  unsigned getTeamId( std::string teamName );
+  std::map<std::string, unsigned> &setTeamIdMap();
+  unsigned setupTeam( std::string teamName );
+
 private:
   std::vector<Object> m_objects;
+  std::map<std::string, unsigned> m_teamId;
+
   Field m_field;
 
   int m_curCycle;

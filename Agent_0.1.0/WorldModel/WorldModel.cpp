@@ -70,6 +70,16 @@ void WorldModel::setCurCycle( int curCycle )
   m_curCycle = curCycle;
 }
 
+void WorldModel::setTeamName( string teamName )
+{
+  m_teamName = teamName;
+}
+
+const string &WorldModel::getTeamName() const
+{
+  return m_teamName;
+}
+
 const Field &WorldModel::getField() const
 {
   return m_field;

@@ -8,10 +8,12 @@ class Action
 public:
   virtual std::string toString() const = 0;
 };
-class StandupAction : public Action
+class StandAction : public Action
 {
 public:
-    StandupAction();
+    StandAction();
+    std::string toString() const;
+
 };
 class WalkAction : public Action
 {
@@ -31,6 +33,13 @@ class RunAction : public Action
 {
 public:
     RunAction();
+    RunAction(double,double);
+    void setX(double);
+    void setY(double);
+    std::string toString() const;
+private:
+    double posX;
+    double posY;
 };
 class FleeAction : public Action
 {

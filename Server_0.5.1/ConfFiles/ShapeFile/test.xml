@@ -1,0 +1,15 @@
+<Mapset name="TestMapset">
+        <Shapefile address="./ground.shp" type="ground">
+                <Column source="type" target="gType">
+                        <Mapping from="khak" to="1" />
+                        <Mapping from="maseh" to="2" />
+                        <Mapping from="gel" to="3" />
+                        <Mapping from="sanglakh" to="4" />
+                </Column>
+                <Column source="id" target="id" />
+        </Shapefile>
+        <Rasterfile id = "1" address="./im.png" />
+        <MapSize minX='0' maxX='546' minY='-630' maxY='0' />
+</Mapset>
+
+
